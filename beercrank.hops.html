@@ -1,0 +1,53 @@
+﻿<div>
+  <table class="table">
+    <thead>
+      <tr>
+       <th></th> 
+       <th></th>
+       <th>Hop</th>
+       <th>AA%</th>
+       <th>Amount</th>
+       <th>Duration</th>
+       <th>IBU</th>
+     </tr>
+   </thead>
+   <tbody>
+     <tr ng-repeat="addition in state.hopAdditions">
+        <td>
+          <a href="" ng-click=removeHopAddition(addition)><i class="icon-minus-sign"></i></a>
+        </td>
+        <td>
+          {{ getHopAdditionAmountPercent(addition) * 100.0 | number:1 }}%
+        </td>
+        <td>
+          <select class="span3" ng-model="addition.hop" ng-options="hop as hop.name for hop in hops | orderBy:'name'"></select>
+        </td>
+        <td>
+          {{ addition.hop.percentAlphaAcids | number:1 }}%
+        </td>
+        <td>
+          <input class="span1" ng-model="addition.amount"></input>
+        </td>
+        <td>
+          <input class="span1" ng-model="addition.duration"></input>
+        </td>
+        <td>
+          <span tooltip-placement="top" tooltip="Utilization: {{ getHopAdditionUtilization(addition) | number:3 }} AAU: {{ getHopAdditionAau(addition) | number:1 }}">
+            {{ getHopAdditionIbu(addition) | number:1 }}
+          </span>
+        </td>
+     </tr>
+    </tbody>
+    <tfoot>
+     <tr>
+        <td><a href="" ng-click="addHopAddition()"><i class="icon-plus-sign"></i></a></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><p>{{ getTotalHopAmount() | number:1 }}</p></td>
+        <td></td>
+        <td><p>{{ getTotalIbu() | number:1 }}</p></td>
+     </tr>
+    </tfoot>
+  </table>
+</div>

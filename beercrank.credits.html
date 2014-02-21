@@ -1,0 +1,32 @@
+﻿<div modal="showCreditsDialog" close="closeCreditsDialog()" options="dialogOptions">
+  <!--
+   malt data
+   http://www.howtobrew.com/section2/chapter12-4-1.html
+   http://www.homebrewtalk.com/wiki/index.php/Malts_Chart
+   http://beertech.blogspot.ca/2010/05/malt-analysis-and-potential-calculation.html
+
+   calculate beer color
+   http://brewwiki.com/index.php/Estimating_Color
+
+   hop utilization
+   http://www.howtobrew.com/section1/chapter5-5.html
+  -->
+
+ <div class="modal-header">
+    <h4>Credits</h4>
+  </div>
+  <div class="modal-body">
+    <p>
+      The calculations and data used here were collected from various sources including:
+    </p>
+    <ul>
+      <li>Beer styles guidlines are <a href="http://www.bjcp.org/styles04/" target="_blank">BJCP 2004-A</a></li>
+      <li>Hop utilization estimation from <a href="http://www.realbeer.com/hops/FAQ.html#units" target="_blank">Norm Pyle's Hops FAQ</a></li>
+      <li>Beer color estimation uses the Moray equation for SRM</li>
+      <li>Malt data comes from the manufacturer's websites: <a target="_blank" href="http://www.weyermannmalt.com/">Weyermann® Specialty Malts</a>, <a target="_blank" href="http://www.brewingwithbriess.com/">Breiss Malt &amp; Ingredients Co.</a></li>
+    </ul>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-warning cancel" ng-click="closeCreditsDialog()">Close</button>
+  </div>
+</div>

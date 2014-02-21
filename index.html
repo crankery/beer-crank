@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html ng-app="beercrank">
+  <head>
+    <title>Beer Crank</title>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body ng-controller="MainController">
+
+    <header class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand">Beer Crank</a>
+          <ul class="nav pull-right">
+            <li><a href="#" ng-click="openAboutDialog()">About</a><li>
+            <li><a href="#" ng-click="openCreditsDialog()">Credits</a></li>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div style="margin: 48px;"></div>
+
+    <div role="main">
+      <div class="container">
+        
+        <div class="row">
+          <div class="span12">
+            <select class="span3"
+                    ng-model="state.beerCategory" 
+                    ng-change="fixBeerStyle()"
+                    ng-options="beerCategory as beerCategory.name for beerCategory in beerCategories | orderBy:'name'">
+            </select>
+            <select class="span3"
+                    ng-model="state.beerStyle" 
+                    ng-options="beerStyle as beerStyle.name for beerStyle in state.beerCategory.getStyles() | orderBy:'name'">
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="span3">
+              <table class="table">
+                <tr>
+                  <td>
+                    <i class="icon-ok" ng-show="isInStyle('og')"></i>
+                    <i class="icon-ban-circle" ng-hide="isInStyle('og')"></i>
+                  </td>
+                  <td>
+                    <p>Original gravity</p>
+                  </td>
+                  <td>
+                    <p>
+                      <span tooltip-placement="right" tooltip="{{ state.beerStyle.ogmin | number:3 }} - {{ state.beerStyle.ogmax | number:3 }}">
+                        {{ getEstimatedGravity() | number:3 }}
+                      </span>
+                    </p> 
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <i class="icon-ok" ng-show="isInStyle('fg')"></i>
+                    <i class="icon-ban-circle" ng-hide="isInStyle('fg')"></i>
+                  </td>
+                  <td>
+                    <p>Final gravity</p>
+                  </td>
+                  <td>
+                    <p>
+                      <span tooltip-placement="right" tooltip="{{ state.beerStyle.fgmin | number:3 }} - {{ state.beerStyle.fgmax | number:3 }}">
+                        {{ getEstimatedFG() | number:3 }}
+                      </span>
+                    </p> 
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <i class="icon-ok" ng-show="isInStyle('abv')"></i>
+                    <i class="icon-ban-circle" ng-hide="isInStyle('abv')"></i>
+                  </td>
+                  <td>
+                    <p>ABV</p>
+                  </td>
+                  <td>
+                    <p>
+                      <span tooltip-placement="right" tooltip="{{ state.beerStyle.abvmin | number:1 }}% - {{ state.beerStyle.abvmax | number:1 }}%">
+                        {{ getEstimatedAbv() * 100 | number:1 }}%
+                      </span>
+                    </p> 
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <i class="icon-ok" ng-show="isInStyle('srm')"></i>
+                    <i class="icon-ban-circle" ng-hide="isInStyle('srm')"></i>
+                  </td>
+                  <td>
+                    <p>Color</p>
+                  </td>
+                  <td>
+                    <p>
+                      <span tooltip-placement="right" tooltip="{{ state.beerStyle.srmmin | number:1 }}&deg;L - {{ state.beerStyle.srmmax | number:1 }}&deg;L">
+                        {{ getEstimatedSrm() | number:1 }}&deg;L
+                      </span>
+                    </p> 
+                  </td>
+                </tr>            
+                <tr>
+                  <td>
+                    <i class="icon-ok" ng-show="isInStyle('ibu')"></i>
+                    <i class="icon-ban-circle" ng-hide="isInStyle('ibu')"></i>
+                  </td>
+                  <td>
+                    <p>Bitterness</p>
+                  </td>
+                  <td>
+                    <p>
+                      <span tooltip-placement="right" tooltip="{{ state.beerStyle.ibumin | number:1 }} - {{ state.beerStyle.ibumax | number:1 }}">
+                        {{ getTotalIbu() | number:1 }}
+                      </span>
+                    </p> 
+                  </td>
+                </tr>            
+                <tr>
+              </table>
+          </div>
+
+          <div class="span9">
+            <tabs>
+              <pane heading="Grain">
+                <malt-template></malt-template>
+              </pane>
+              <pane heading="Hops">
+                <hops-template></hops-template>
+              </pane>
+              <pane heading="Brewhouse">
+                <brewhouse-template></brewhouse-template>
+              </pane>
+            </tabs>
+          </div> 
+        </div> 
+      </div>
+    </div>
+
+    <about-template></about-template>
+    <credits-template></credits-template>
+	
+    <script src="http://code.angularjs.org/1.0.6/angular.js"></script>
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.js"></script>    
+    <script src="js/beercrank.malt.js"></script>
+    <script src="js/beercrank.hop.js"></script>
+    <script src="js/beercrank.beerStyle.js"></script>
+    <script src="js/beercrank.units.js"></script>
+    <script src="js/beercrank.js"></script>
+  </body>
+</html>

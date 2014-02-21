@@ -1,0 +1,54 @@
+﻿<div>
+  <table class="table">
+    <thead>
+      <tr>
+       <th></th> 
+       <th></th>
+       <th>Malt</th>
+       <th>Amount</th>
+       <th>Points</th>
+       <th>&deg;L</th>
+     </tr>
+    </thead>
+   <tbody>
+     <tr ng-repeat="quantity in state.maltQuantities">
+        <td>
+          <a href="" ng-click=removeMaltQuantity(quantity)><i class="icon-minus-sign"></i></a>
+        </td>
+        <td>
+          <p>{{ getMaltQuantityAmountPercent(quantity) * 100.0 | number:1 }}%</p>
+        </td>
+        <td>
+          <select class="span4" ng-model="quantity.malt" ng-options="malt as malt.name for malt in malts | orderBy:'name'"></select>
+        </td>
+        <td>
+          <input class="span1" ng-model="quantity.amount"></input>
+        </td>
+        <td>
+          <p>{{ getMaltQuantityPoints(quantity) | number:1 }}<p>
+        </td>
+        <td>
+          <p>{{ getMaltQuantitySrm(quantity) | number:2 }}</p>
+        </td>
+     </tr>
+     <tfoot>
+        <td>
+          <a href="" ng-click="addMaltQuantity()"><i class="icon-plus-sign"></i></a>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+          <p>{{ getTotalMaltAmount() | number:1 }}</p>
+        </td>
+        <td>
+          <p>{{ getTotalPoints() | number:1 }}</p>
+        </td>
+        <td>
+          <p>{{ getEstimatedSrm() | number:1 }}</p>
+        </td>
+     </tfoot>
+   </tbody>
+  </table>
+</div>
